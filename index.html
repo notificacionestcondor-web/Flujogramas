@@ -1,106 +1,168 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Tracking Transporte</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<title>Tracking Transporte</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: #f4f6f8;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+/* CONTENEDOR */
+.flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/* FILAS */
+.row {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+
+/* CAJAS */
+.box {
+  position: relative;
+  padding: 15px 20px;
+  border-radius: 10px;
+  color: #333;
+  cursor: pointer;
+  transition: 0.2s;
+  min-width: 160px;
+  text-align: center;
+}
+
+.box:hover {
+  transform: scale(1.05);
+}
+
+/* COLORES */
+.estado { background: #e3f2fd; }
+.ok { background: #e8f5e9; }
+.warn { background: #fff3cd; }
+.error { background: #f8d7da; }
+
+/* TOOLTIP BONITO */
+.box::after {
+  content: attr(data-info);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  width: 180px;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.box:hover::after {
+  opacity: 1;
+}
+
+/* FLECHAS */
+.arrow {
+  width: 2px;
+  height: 30px;
+  background: #999;
+}
+</style>
 </head>
 
 <body>
 
-<h1>Flujo de Tracking Transporte</h1>
+<h1>Flujo Tracking Transporte</h1>
 
-<div class="timeline">
+<div class="flow">
 
   <!-- ORIGEN -->
-  <div class="step estado" title="Cliente crea la guía en el sistema">
-    1. Creado
+  <div class="row">
+    <div class="box estado" data-info="Cliente crea la guía">
+      1. Creado
+    </div>
+    <div class="box estado" data-info="Pendiente programación">
+      2. Pendiente recolección
+    </div>
+    <div class="box estado" data-info="Validación física">
+      3. Muelle
+    </div>
+    <div class="box estado" data-info="Unidad cargada">
+      4. Recolectado
+    </div>
   </div>
 
-  <div class="step estado" title="Guía en espera de programación logística">
-    2. Pendiente de recolección
-  </div>
-
-  <div class="step estado" title="Validación física y documental">
-    3. Muelle / Pre-chequeo
-  </div>
-
-  <div class="step estado" title="Unidad cargada en vehículo principal">
-    4. Recolectado
-  </div>
+  <div class="arrow"></div>
 
   <!-- CEDI -->
-  <div class="step estado" title="Salida hacia centro de distribución">
-    5. Salida CEDI
+  <div class="row">
+    <div class="box estado" data-info="Salida hacia CEDI">
+      5. Salida CEDI
+    </div>
+    <div class="box estado" data-info="Descarga en bodega">
+      6. Descargue CEDI
+    </div>
+    <div class="box estado" data-info="Espera de asignación">
+      6.1 En espera
+    </div>
+    <div class="box estado" data-info="Cambio de vehículo">
+      6.2 Reasignación
+    </div>
   </div>
 
-  <div class="step estado" title="Descarga en bodega para clasificación">
-    6. Descargue CEDI
-  </div>
-
-  <div class="step estado sub" title="Pendiente asignación de vehículo">
-    6.1 En espera en CEDI
-  </div>
-
-  <div class="step estado sub" title="Cambio de vehículo para ruta nacional">
-    6.2 Reasignación de flota
-  </div>
+  <div class="arrow"></div>
 
   <!-- TRANSPORTE -->
-  <div class="step estado" title="Transporte entre ciudades">
-    7. En tránsito nacional
+  <div class="row">
+    <div class="box estado" data-info="Viaje entre ciudades">
+      7. En tránsito
+    </div>
   </div>
+
+  <div class="arrow"></div>
 
   <!-- DESTINO -->
-  <div class="step estado" title="Llegada y descarga en destino">
-    8. Descargue CEDI destino
+  <div class="row">
+    <div class="box estado" data-info="Descarga en destino">
+      8. Descargue destino
+    </div>
+    <div class="box estado" data-info="Pendiente local">
+      8.1 Espera local
+    </div>
+    <div class="box estado" data-info="Asignación urbana">
+      9. Asignación local
+    </div>
+    <div class="box estado" data-info="Entrega en ruta">
+      9.2 En ruta
+    </div>
   </div>
 
-  <div class="step estado sub" title="Pendiente asignación local">
-    8.1 En espera asignación local
-  </div>
+  <div class="arrow"></div>
 
-  <div class="step estado" title="Asignación a vehículo urbano">
-    9. Asignación vehículo local
-  </div>
-
-  <div class="step estado sub" title="Proceso de reparto en ciudad">
-    9.1 En distribución
-  </div>
-
-  <div class="step estado sub" title="Vehículo en ruta hacia cliente">
-    9.2 En ruta de entrega
-  </div>
-
-  <!-- ENTREGA -->
-  <div class="step ok" title="Entrega exitosa al cliente">
-    10. Entrega efectiva
-  </div>
-
-  <div class="step warn" title="Entrega con incidencia menor">
-    10.1 Entrega con novedad
-  </div>
-
-  <!-- INCIDENCIA -->
-  <div class="step error" title="No se logra entrega">
-    11. Incidencia no entrega
-  </div>
-
-  <div class="step warn sub" title="Cliente ausente, dirección incorrecta, etc">
-    11.1 Novedad reportada
-  </div>
-
-  <div class="step estado sub" title="Se gestiona solución para reintento">
-    11.2 Solución aplicada (retorna a 9.2)
-  </div>
-
-  <!-- CIERRES -->
-  <div class="step error" title="Retorno a ciudad origen">
-    12. Devuelto a origen
-  </div>
-
-  <div class="step error" title="Servicio cancelado">
-    13. Cancelado
+  <!-- RESULTADOS -->
+  <div class="row">
+    <div class="box ok" data-info="Entrega exitosa">
+      10. Entregado
+    </div>
+    <div class="box warn" data-info="Entrega con novedad">
+      10.1 Novedad
+    </div>
+    <div class="box error" data-info="No se logró entrega">
+      11. Incidencia
+    </div>
   </div>
 
 </div>
