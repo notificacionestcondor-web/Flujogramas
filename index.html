@@ -1,1 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tracking Transporte</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
 
+<body>
+
+<h1>Flujo de Tracking Transporte</h1>
+
+<div class="timeline">
+
+  <!-- ORIGEN -->
+  <div class="step estado" title="Cliente crea la guía en el sistema">
+    1. Creado
+  </div>
+
+  <div class="step estado" title="Guía en espera de programación logística">
+    2. Pendiente de recolección
+  </div>
+
+  <div class="step estado" title="Validación física y documental">
+    3. Muelle / Pre-chequeo
+  </div>
+
+  <div class="step estado" title="Unidad cargada en vehículo principal">
+    4. Recolectado
+  </div>
+
+  <!-- CEDI -->
+  <div class="step estado" title="Salida hacia centro de distribución">
+    5. Salida CEDI
+  </div>
+
+  <div class="step estado" title="Descarga en bodega para clasificación">
+    6. Descargue CEDI
+  </div>
+
+  <div class="step estado sub" title="Pendiente asignación de vehículo">
+    6.1 En espera en CEDI
+  </div>
+
+  <div class="step estado sub" title="Cambio de vehículo para ruta nacional">
+    6.2 Reasignación de flota
+  </div>
+
+  <!-- TRANSPORTE -->
+  <div class="step estado" title="Transporte entre ciudades">
+    7. En tránsito nacional
+  </div>
+
+  <!-- DESTINO -->
+  <div class="step estado" title="Llegada y descarga en destino">
+    8. Descargue CEDI destino
+  </div>
+
+  <div class="step estado sub" title="Pendiente asignación local">
+    8.1 En espera asignación local
+  </div>
+
+  <div class="step estado" title="Asignación a vehículo urbano">
+    9. Asignación vehículo local
+  </div>
+
+  <div class="step estado sub" title="Proceso de reparto en ciudad">
+    9.1 En distribución
+  </div>
+
+  <div class="step estado sub" title="Vehículo en ruta hacia cliente">
+    9.2 En ruta de entrega
+  </div>
+
+  <!-- ENTREGA -->
+  <div class="step ok" title="Entrega exitosa al cliente">
+    10. Entrega efectiva
+  </div>
+
+  <div class="step warn" title="Entrega con incidencia menor">
+    10.1 Entrega con novedad
+  </div>
+
+  <!-- INCIDENCIA -->
+  <div class="step error" title="No se logra entrega">
+    11. Incidencia no entrega
+  </div>
+
+  <div class="step warn sub" title="Cliente ausente, dirección incorrecta, etc">
+    11.1 Novedad reportada
+  </div>
+
+  <div class="step estado sub" title="Se gestiona solución para reintento">
+    11.2 Solución aplicada (retorna a 9.2)
+  </div>
+
+  <!-- CIERRES -->
+  <div class="step error" title="Retorno a ciudad origen">
+    12. Devuelto a origen
+  </div>
+
+  <div class="step error" title="Servicio cancelado">
+    13. Cancelado
+  </div>
+
+</div>
+
+</body>
+</html>
