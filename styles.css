@@ -1,1 +1,88 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  margin: 0;
+  padding: 30px;
+}
 
+h1 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Timeline */
+.timeline {
+  max-width: 600px;
+  margin: auto;
+  position: relative;
+  padding-left: 30px;
+}
+
+/* Línea vertical */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: #ccc;
+}
+
+/* Paso */
+.step {
+  position: relative;
+  background: white;
+  padding: 12px 16px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 14px;
+}
+
+/* Punto */
+.step::before {
+  content: "";
+  position: absolute;
+  left: -22px;
+  top: 15px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #999;
+}
+
+/* Hover */
+.step:hover {
+  transform: scale(1.02);
+}
+
+/* Subniveles */
+.sub {
+  margin-left: 20px;
+  font-size: 13px;
+}
+
+/* Colores */
+.estado {
+  border-left: 5px solid #1e88e5;
+}
+
+.ok {
+  border-left: 5px solid #43a047;
+}
+
+.warn {
+  border-left: 5px solid #f9a825;
+}
+
+.error {
+  border-left: 5px solid #e53935;
+}
+
+/* Punto colores */
+.estado::before { background: #1e88e5; }
+.ok::before { background: #43a047; }
+.warn::before { background: #f9a825; }
+.error::before { background: #e53935; }
